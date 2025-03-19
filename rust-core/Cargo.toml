@@ -1,0 +1,25 @@
+[package]
+name = "robotics_core"
+version = "0.1.0"
+edition = "2021"
+authors = ["Nathfavour"]
+description = "Core performance-critical components for robotics-core1"
+
+[lib]
+name = "robotics_core"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# Minimal dependencies for Python bindings
+pyo3 = { version = "0.18", features = ["extension-module"], optional = true }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[features]
+default = []
+python-binding = ["pyo3"]
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = 3
